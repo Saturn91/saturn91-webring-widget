@@ -193,7 +193,7 @@
                     <p>Something went wrong</p>
                 </div>
                 <div class="webring-footer">
-                    <a href="#" class="join-link">Join the Webring</a>
+                    <a href="https://saturn91.github.io/saturn91-webring-widget/" class="join-link">Join the Webring</a>
                 </div>
             `;
         }
@@ -243,7 +243,7 @@
         html += `
             </div>
             <div class="webring-footer">
-                <a href="#" class="join-link">Join the Webring</a>
+                <a href="https://saturn91.github.io/saturn91-webring-widget/" class="join-link">Join the Webring</a>
             </div>
         `;
         
