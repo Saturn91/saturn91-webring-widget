@@ -15,6 +15,7 @@
             color: '#000000', // Default text/border color
             backgroundColor: '#ffffff', // Default background color
             dataSource: 'https://saturn91.github.io/saturn91-webring-data/public/', // Default data source
+            maxLinks: 4, // Default maximum links per column
         };
         
         // Check script tag data attributes
@@ -46,6 +47,17 @@
             if (dataSourceAttr) {
                 // Ensure the data source ends with a slash
                 config.dataSource = dataSourceAttr.endsWith('/') ? dataSourceAttr : dataSourceAttr + '/';
+            }
+            
+            // Get max links attribute
+            const maxLinksAttr = scriptTag.getAttribute('data-max-links');
+            if (maxLinksAttr) {
+                const maxLinks = parseInt(maxLinksAttr, 10);
+                if (maxLinks > 0) {
+                    config.maxLinks = maxLinks;
+                } else {
+                    console.warn('data-max-links must be a positive number > 0, using default value of 4');
+                }
             }
         }
         
@@ -92,7 +104,7 @@
     }
     
     // Fetch category data from individual JSON files
-    async function fetchCategoryData(categories, dataSource = defaultDataSource) {
+    async function fetchCategoryData(categories, dataSource = defaultDataSource, maxLinks = 4) {
         const categoryData = {};
         
         for (const category of categories) {
@@ -106,12 +118,12 @@
                     url: link.url
                 }));
                 
-                // Shuffle and take first 4
+                // Shuffle and take first maxLinks
                 const shuffledLinks = shuffleArray(allLinks);
-                const links = shuffledLinks.slice(0, 4);
+                const links = shuffledLinks.slice(0, maxLinks);
                 
                 categoryData[category] = links;
-                console.log(`Fetched and shuffled ${links.length} links for category: ${category} from ${dataSource}`);
+                console.log(`Fetched and shuffled ${links.length} links for category: ${category} from ${dataSource} (max: ${maxLinks})`);
                 
             } catch (error) {
                 console.error(`Error fetching category ${category} from ${dataSource}:`, error);
@@ -166,7 +178,7 @@
             
             // Fetch real data for valid categories
             if (categories.length > 0) {
-                realCategoryData = await fetchCategoryData(categories, config.dataSource);
+                realCategoryData = await fetchCategoryData(categories, config.dataSource, config.maxLinks);
                 
                 // Check if we actually got any data
                 const hasAnyLinks = Object.values(realCategoryData).some(links => links.length > 0);
