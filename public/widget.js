@@ -4,7 +4,7 @@
     const defaultDataSource = "https://saturn91.github.io/saturn91-webring-data/public/";
     
     // Prevent multiple initializations
-    if (window.SaturnWebringWidget) {
+    if (window.Saturn91WebringWidget) {
         return;
     }
     
@@ -470,5 +470,5 @@
     }
     
     // Mark as initialized
-    window.SaturnWebringWidget = true;
+    window.Saturn91WebringWidget = true;
 })();
