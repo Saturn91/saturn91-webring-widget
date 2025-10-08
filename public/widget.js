@@ -1,5 +1,7 @@
 (function() {
     'use strict';
+
+    const defaultDataSource = "https://saturn91.github.io/saturn91-webring-data/public/";
     
     // Prevent multiple initializations
     if (window.SaturnWebringWidget) {
@@ -12,6 +14,7 @@
             categories: [], // Default: empty array means all categories
             color: '#000000', // Default text/border color
             backgroundColor: '#ffffff', // Default background color
+            dataSource: 'https://saturn91.github.io/saturn91-webring-data/public/', // Default data source
         };
         
         // Check script tag data attributes
@@ -36,6 +39,13 @@
             const bgColorAttr = scriptTag.getAttribute('data-background-color');
             if (bgColorAttr) {
                 config.backgroundColor = bgColorAttr;
+            }
+            
+            // Get data source attribute
+            const dataSourceAttr = scriptTag.getAttribute('data-source');
+            if (dataSourceAttr) {
+                // Ensure the data source ends with a slash
+                config.dataSource = dataSourceAttr.endsWith('/') ? dataSourceAttr : dataSourceAttr + '/';
             }
         }
         
@@ -82,12 +92,12 @@
     }
     
     // Fetch category data from individual JSON files
-    async function fetchCategoryData(categories) {
+    async function fetchCategoryData(categories, dataSource = defaultDataSource) {
         const categoryData = {};
         
         for (const category of categories) {
             try {
-                const response = await fetch(`https://saturn91.github.io/saturn91-webring-data/public/${category}.json`);
+                const response = await fetch(`${dataSource}${category}.json`);
                 const data = await response.json();
                 
                 // Transform and shuffle the data
@@ -101,10 +111,10 @@
                 const links = shuffledLinks.slice(0, 4);
                 
                 categoryData[category] = links;
-                console.log(`Fetched and shuffled ${links.length} links for category: ${category}`);
+                console.log(`Fetched and shuffled ${links.length} links for category: ${category} from ${dataSource}`);
                 
             } catch (error) {
-                console.error(`Error fetching category ${category}:`, error);
+                console.error(`Error fetching category ${category} from ${dataSource}:`, error);
                 categoryData[category] = []; // Empty array if fetch fails
             }
         }
@@ -145,17 +155,18 @@
         
         try {
             // Fetch the index.json file
-            const response = await fetch('https://saturn91.github.io/saturn91-webring-data/public/index.json');
+            const response = await fetch(`${config.dataSource}index.json`);
             const data = await response.json();
             
             // Match requested categories with available ones
             const categories = matchCategories(config.categories, data);
             
             console.log('Valid categories to fetch:', categories);
+            console.log('Using data source:', config.dataSource);
             
             // Fetch real data for valid categories
             if (categories.length > 0) {
-                realCategoryData = await fetchCategoryData(categories);
+                realCategoryData = await fetchCategoryData(categories, config.dataSource);
                 
                 // Check if we actually got any data
                 const hasAnyLinks = Object.values(realCategoryData).some(links => links.length > 0);
