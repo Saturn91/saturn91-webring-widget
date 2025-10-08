@@ -3,11 +3,6 @@
 
     const defaultDataSource = "https://saturn91.github.io/saturn91-webring-data/public/";
     
-    // Prevent multiple initializations
-    if (window.Saturn91WebringWidget) {
-        return;
-    }
-    
     // Get configuration from script tag data attributes
     function getWidgetConfig() {
         const config = {
