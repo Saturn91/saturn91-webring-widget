@@ -4,16 +4,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saturn Webring Widget Demo</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+            background-size: 400% 400%;
+            animation: rainbow 4s ease infinite;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #000080;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        h1 {
+            color: #ff0000;
+            text-shadow: 2px 2px 0px #ffff00;
+            font-size: 36px;
+            text-align: center;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+        
+        p {
+            background: #ffff00;
+            border: 3px solid #ff00ff;
+            padding: 10px;
+            margin: 15px 0;
+            font-weight: bold;
+            box-shadow: 5px 5px 0px #00ff00;
+        }
+        
+        code {
+            background: #00ffff;
+            color: #ff0000;
+            padding: 5px;
+            border: 2px dashed #000080;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            display: block;
+            margin: 10px 0;
+        }
+        
+        a {
+            color: #ff00ff;
+            text-decoration: none;
+            font-weight: bold;
+            background: #00ff00;
+            padding: 8px 15px;
+            border: 3px solid #ff0000;
+            display: inline-block;
+            margin: 10px 0;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        a:hover {
+            background: #ffff00;
+            color: #0000ff;
+            transform: rotate(2deg);
+        }
+        
+        /* Add some 90's flair */
+        body::before {
+            content: "🌈 Welcome to the 90's! 🌈";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #000080;
+            color: #ffff00;
+            text-align: center;
+            padding: 5px;
+            font-weight: bold;
+            z-index: 1000;
+            animation: scroll 10s linear infinite;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        body {
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Demo Page</h1>
+    <h1>🎉 Demo Page 🎉</h1>
     <p>This demonstrates how to include the Saturn Webring Widget in any website:</p>
 
-    <a href="https://github.com/Saturn91/saturn91-webring-widget">View on GitHub</a>
+    <a href="https://github.com/Saturn91/saturn91-webring-widget">🚀 View on GitHub 🚀</a>
     
     <p>Just add this script tag to any website:</p>
     <code>&lt;script src="https://saturn91.github.io/saturn91-webring-widget/public/widget.js"&gt;&lt;/script&gt;</code>
-    
-    <script src="./public/widget.js" data-categories="web-dev,game-dev"></script>
+
+    <script src="./public/widget.js" data-categories="web-dev,game-dev" data-color="#ff00ff" data-background-color="#00ffff"></script>
 </body>
 </html>
