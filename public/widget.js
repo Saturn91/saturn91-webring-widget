@@ -67,6 +67,47 @@
         return validCategories;
     }
     
+    // Shuffle array using Fisher-Yates algorithm
+    function shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }
+    
+    // Fetch category data from individual JSON files
+    async function fetchCategoryData(categories) {
+        const categoryData = {};
+        
+        for (const category of categories) {
+            try {
+                const response = await fetch(`https://saturn91.github.io/saturn91-webring-data/public/${category}.json`);
+                const data = await response.json();
+                
+                // Transform and shuffle the data
+                const allLinks = data.links.map(link => ({
+                    title: link.owner,
+                    url: link.url
+                }));
+                
+                // Shuffle and take first 4
+                const shuffledLinks = shuffleArray(allLinks);
+                const links = shuffledLinks.slice(0, 4);
+                
+                categoryData[category] = links;
+                console.log(`Fetched and shuffled ${links.length} links for category: ${category}`);
+                
+            } catch (error) {
+                console.error(`Error fetching category ${category}:`, error);
+                categoryData[category] = []; // Empty array if fetch fails
+            }
+        }
+        
+        return categoryData;
+    }
+    
     // Filter webring data by categories
     function filterByCategories(data, categories) {
         if (!categories || categories.length === 0) {
@@ -95,6 +136,9 @@
         // Get widget configuration
         const config = getWidgetConfig();
         
+        let realCategoryData = {};
+        let hasError = false;
+        
         try {
             // Fetch the index.json file
             const response = await fetch('https://saturn91.github.io/saturn91-webring-data/public/index.json');
@@ -103,16 +147,30 @@
             // Match requested categories with available ones
             const categories = matchCategories(config.categories, data);
             
-            // Filter by categories if specified
-            const filteredData = filterByCategories(data, categories);            
+            console.log('Valid categories to fetch:', categories);
+            
+            // Fetch real data for valid categories
+            if (categories.length > 0) {
+                realCategoryData = await fetchCategoryData(categories);
+                
+                // Check if we actually got any data
+                const hasAnyLinks = Object.values(realCategoryData).some(links => links.length > 0);
+                if (!hasAnyLinks) {
+                    hasError = true;
+                }
+            } else {
+                hasError = true;
+            }
+            
         } catch (error) {
             console.error('Error fetching webring data:', error);
+            hasError = true;
         }
         
-        // Create modern webring widget with mockup data
+        // Create modern webring widget with real data or error message
         const widget = document.createElement('div');
         widget.id = 'saturn-webring-widget';
-        widget.innerHTML = createWidgetHTML();
+        widget.innerHTML = createWidgetHTML(realCategoryData, hasError);
         
         // Apply modern styles with custom colors
         applyWidgetStyles(config.color, config.backgroundColor);
@@ -124,41 +182,46 @@
     }
     
     // Create the widget HTML structure
-    function createWidgetHTML() {
-        // Mockup data for 3 categories
-        const mockupData = {
-            'Web Dev': [
-                { title: 'Awesome Portfolio Site', url: 'https://link1.com' },
-                { title: 'Modern Web Studio', url: 'https://link2.com' },
-                { title: 'Creative Agency Hub', url: 'https://link3.com' },
-                { title: 'Frontend Showcase', url: 'https://link4.com' }
-            ],
-            'Game Dev': [
-                { title: 'Indie Game Studio', url: 'https://link5.com' },
-                { title: 'Pixel Art Games', url: 'https://link6.com' },
-                { title: 'Adventure Quest Hub', url: 'https://link7.com' },
-                { title: 'Retro Game Archive', url: 'https://link8.com' }
-            ],
-            'Art & Design': [
-                { title: 'Digital Art Gallery', url: 'https://link9.com' },
-                { title: 'Illustration Studio', url: 'https://link10.com' },
-                { title: 'Creative Workshop', url: 'https://link11.com' },
-                { title: 'Design Inspiration', url: 'https://link12.com' }
-            ]
-        };
+    function createWidgetHTML(realData = {}, hasError = false) {
+        // Handle error case
+        if (hasError || Object.keys(realData).length === 0) {
+            return `
+                <div class="webring-header">
+                    <h3>Saturn Webring</h3>
+                </div>
+                <div class="webring-error">
+                    <p>Something went wrong</p>
+                </div>
+                <div class="webring-footer">
+                    <a href="#" class="join-link">Join the Webring</a>
+                </div>
+            `;
+        }
+        
+        // Use real data
+        console.log('Using real webring data:', realData);
         
         let html = `
             <div class="webring-header">
-                <h3>Join Saturn91's Webring</h3>
+                <h3>Saturn Webring</h3>
             </div>
             <div class="webring-grid">
         `;
         
         // Generate columns for each category
-        Object.entries(mockupData).forEach(([category, links]) => {
+        Object.entries(realData).forEach(([category, links]) => {
+            // Skip categories with no links
+            if (links.length === 0) return;
+            
+            // Format category name for display (replace hyphens with spaces and capitalize)
+            const displayName = category.replace(/-/g, ' ')
+                .split(' ')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+                
             html += `
                 <div class="webring-column">
-                    <h4 class="category-title">${category}</h4>
+                    <h4 class="category-title">${displayName}</h4>
                     <div class="links-container">
             `;
             
@@ -280,6 +343,18 @@
                 text-align: center;
                 padding-top: 20px;
                 border-top: 1px solid var(--widget-color);
+            }
+            
+            .webring-error {
+                text-align: center;
+                padding: 40px 20px;
+                margin-bottom: 30px;
+            }
+            
+            .webring-error p {
+                font-size: 16px;
+                color: var(--widget-color);
+                margin: 0;
             }
             
             .join-link {
