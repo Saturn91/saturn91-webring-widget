@@ -298,24 +298,24 @@
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
                 width: 100%;
                 margin: 0;
-                padding: 30px;
+                padding: 15px;
                 background: var(--widget-bg-color);
                 border: 1px solid var(--widget-color);
                 color: var(--widget-color);
-                line-height: 1.5;
+                line-height: 1.3;
                 box-sizing: border-box;
             }
             
             .webring-header {
                 text-align: center;
-                margin-bottom: 30px;
-                padding-bottom: 20px;
+                margin-bottom: 15px;
+                padding-bottom: 10px;
                 border-bottom: 1px solid var(--widget-color);
             }
             
             .webring-header h3 {
-                margin: 0 0 8px 0;
-                font-size: 24px;
+                margin: 0;
+                font-size: 20px;
                 font-weight: 600;
                 color: var(--widget-color);
             }
@@ -323,8 +323,8 @@
             .webring-grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 30px;
-                margin-bottom: 30px;
+                gap: 20px;
+                margin-bottom: 15px;
             }
             
             .webring-column {
@@ -337,23 +337,23 @@
             }
             
             .category-title {
-                margin: 0 0 16px 0;
-                font-size: 18px;
+                margin: 0 0 10px 0;
+                font-size: 16px;
                 font-weight: 600;
                 color: var(--widget-color);
-                padding-bottom: 8px;
+                padding-bottom: 6px;
                 border-bottom: 1px solid var(--widget-color);
             }
             
             .links-container {
                 display: flex;
                 flex-direction: column;
-                gap: 8px;
+                gap: 4px;
             }
             
             .webring-link {
                 display: block;
-                padding: 8px 0;
+                padding: 4px 0;
                 color: var(--widget-color);
                 text-decoration: underline;
                 font-size: 14px;
@@ -374,14 +374,14 @@
             
             .webring-footer {
                 text-align: center;
-                padding-top: 20px;
+                padding-top: 12px;
                 border-top: 1px solid var(--widget-color);
             }
             
             .webring-error {
                 text-align: center;
-                padding: 40px 20px;
-                margin-bottom: 30px;
+                padding: 20px 10px;
+                margin-bottom: 15px;
             }
             
             .webring-error p {
@@ -411,19 +411,19 @@
             @media (max-width: 768px) {
                 #saturn91-webring-widget {
                     margin: 0;
-                    padding: 20px;
+                    padding: 12px;
                     width: 100%;
                 }
                 
                 .webring-grid {
                     grid-template-columns: 1fr;
-                    gap: 20px;
+                    gap: 15px;
                 }
                 
                 .webring-column {
                     border-right: none;
                     padding-right: 0;
-                    padding-bottom: 20px;
+                    padding-bottom: 12px;
                     border-bottom: 1px solid var(--widget-color);
                 }
                 
@@ -432,7 +432,7 @@
                 }
                 
                 .webring-header h3 {
-                    font-size: 20px;
+                    font-size: 18px;
                 }
                 
                 .webring-header p {
@@ -440,21 +440,21 @@
                 }
                 
                 .category-title {
-                    font-size: 16px;
+                    font-size: 15px;
                 }
             }
             
             @media (max-width: 480px) {
                 #saturn91-webring-widget {
-                    padding: 16px;
+                    padding: 10px;
                 }
                 
                 .webring-header {
-                    margin-bottom: 20px;
+                    margin-bottom: 12px;
                 }
                 
                 .webring-grid {
-                    gap: 16px;
+                    gap: 12px;
                 }
             }
         `;
