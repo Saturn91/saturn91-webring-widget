@@ -38,6 +38,7 @@ All parameters are optional and can be added as `data-*` attributes to the scrip
 | `data-color` | Text and border color | `#000000` (black) | `"#ff0000"` |
 | `data-background-color` | Background color | `#ffffff` (white) | `"#f5f5f5"` |
 | `data-max-links` | Maximum links per category column | `4` | `"6"` |
+| `data-border` | CSS border style for widget container | `1px solid var(--widget-color)` | `"2px dashed #ff0000"` |
 | `data-source` | Custom data source URL | Saturn's webring data | `"https://mysite.com/webring/"` |
 
 ### Example with All Parameters
@@ -50,6 +51,7 @@ All parameters are optional and can be added as `data-*` attributes to the scrip
     data-color="#333333"
     data-background-color="#f9f9f9"
     data-max-links="6"
+    data-border="2px solid #0066cc"
     data-source="https://saturn91.github.io/saturn91-webring-data/public/">
 </script>
 ```
@@ -104,6 +106,35 @@ The widget will look for an element with `id="saturn91-webring"` and insert itse
     src="widget.js"
     data-color="#0066cc"
     data-background-color="#f0f8ff">
+</script>
+```
+
+### Border Styles
+
+```html
+<!-- No border -->
+<script 
+    src="widget.js"
+    data-border="none">
+</script>
+
+<!-- Dashed border -->
+<script 
+    src="widget.js"
+    data-border="2px dashed #ff0000">
+</script>
+
+<!-- Rounded border -->
+<script 
+    src="widget.js"
+    data-border="1px solid #333"
+    style="border-radius: 8px;">
+</script>
+
+<!-- Thick colorful border -->
+<script 
+    src="widget.js"
+    data-border="4px solid #00ff00">
 </script>
 ```
 

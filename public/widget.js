@@ -16,6 +16,7 @@
             backgroundColor: '#ffffff', // Default background color
             dataSource: 'https://saturn91.github.io/saturn91-webring-data/public/', // Default data source
             maxLinks: 4, // Default maximum links per column
+            border: '', // Default border
         };
         
         // Check script tag data attributes
@@ -58,6 +59,12 @@
                 } else {
                     console.warn('data-max-links must be a positive number > 0, using default value of 4');
                 }
+            }
+            
+            // Get border attribute
+            const borderAttr = scriptTag.getAttribute('data-border');
+            if (borderAttr) {
+                config.border = borderAttr;
             }
         }
         
@@ -200,7 +207,7 @@
         widget.innerHTML = createWidgetHTML(realCategoryData, hasError);
         
         // Apply modern styles with custom colors
-        applyWidgetStyles(config.color, config.backgroundColor);
+        applyWidgetStyles(config.color, config.backgroundColor, config.border);
         
         // Find target container or fall back to body
         const targetContainer = document.getElementById('saturn91-webring');
@@ -283,7 +290,7 @@
     }
     
     // Apply modern responsive styles
-    function applyWidgetStyles(color = '#000000', backgroundColor = '#ffffff') {
+    function applyWidgetStyles(color = '#000000', backgroundColor = '#ffffff', border = '1px solid var(--widget-color)') {
         // Check if styles are already applied
         if (document.getElementById('saturn91-webring-styles')) {
             return;
@@ -300,7 +307,7 @@
                 margin: 0;
                 padding: 15px;
                 background: var(--widget-bg-color);
-                border: 1px solid var(--widget-color);
+                border: ${border};
                 color: var(--widget-color);
                 line-height: 1.3;
                 box-sizing: border-box;
