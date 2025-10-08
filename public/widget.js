@@ -196,7 +196,7 @@
         
         // Create modern webring widget with real data or error message
         const widget = document.createElement('div');
-        widget.id = 'saturn-webring-widget';
+        widget.id = 'saturn91-webring-widget';
         widget.innerHTML = createWidgetHTML(realCategoryData, hasError);
         
         // Apply modern styles with custom colors
@@ -219,7 +219,7 @@
         if (hasError || Object.keys(realData).length === 0) {
             return `
                 <div class="webring-header">
-                    <h3>Saturn Webring</h3>
+                    <h3>Saturn91's Webring</h3>
                 </div>
                 <div class="webring-error">
                     <p>Something went wrong</p>
@@ -235,7 +235,7 @@
         
         let html = `
             <div class="webring-header">
-                <h3>Saturn Webring</h3>
+                <h3>Saturn91 Webring</h3>
             </div>
             <div class="webring-grid">
         `;
@@ -285,14 +285,14 @@
     // Apply modern responsive styles
     function applyWidgetStyles(color = '#000000', backgroundColor = '#ffffff') {
         // Check if styles are already applied
-        if (document.getElementById('saturn-webring-styles')) {
+        if (document.getElementById('saturn91-webring-styles')) {
             return;
         }
         
         const styleElement = document.createElement('style');
-        styleElement.id = 'saturn-webring-styles';
+        styleElement.id = 'saturn91-webring-styles';
         styleElement.textContent = `
-            #saturn-webring-widget {
+            #saturn91-webring-widget {
                 --widget-color: ${color};
                 --widget-bg-color: ${backgroundColor};
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -409,7 +409,7 @@
             
             /* Responsive Design */
             @media (max-width: 768px) {
-                #saturn-webring-widget {
+                #saturn91-webring-widget {
                     margin: 0;
                     padding: 20px;
                     width: 100%;
@@ -445,7 +445,7 @@
             }
             
             @media (max-width: 480px) {
-                #saturn-webring-widget {
+                #saturn91-webring-widget {
                     padding: 16px;
                 }
                 
