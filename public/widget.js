@@ -190,10 +190,15 @@
         // Apply modern styles with custom colors
         applyWidgetStyles(config.color, config.backgroundColor);
         
-        // Add to page
-        document.body.appendChild(widget);
-        
-        console.log('Saturn91\'s Webring Widget: initialized!');
+        // Find target container or fall back to body
+        const targetContainer = document.getElementById('saturn91-webring');
+        if (targetContainer) {
+            targetContainer.appendChild(widget);
+            console.log('Saturn91\'s Webring Widget: initialized in #saturn91-webring container!');
+        } else {
+            document.body.appendChild(widget);
+            console.log('Saturn91\'s Webring Widget: initialized in document body (no #saturn91-webring container found)!');
+        }
     }
     
     // Create the widget HTML structure
@@ -279,13 +284,14 @@
                 --widget-color: ${color};
                 --widget-bg-color: ${backgroundColor};
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-                max-width: 1000px;
-                margin: 30px auto;
+                width: 100%;
+                margin: 0;
                 padding: 30px;
                 background: var(--widget-bg-color);
                 border: 1px solid var(--widget-color);
                 color: var(--widget-color);
                 line-height: 1.5;
+                box-sizing: border-box;
             }
             
             .webring-header {
@@ -392,9 +398,9 @@
             /* Responsive Design */
             @media (max-width: 768px) {
                 #saturn-webring-widget {
-                    margin: 20px auto;
+                    margin: 0;
                     padding: 20px;
-                    max-width: 95%;
+                    width: 100%;
                 }
                 
                 .webring-grid {
