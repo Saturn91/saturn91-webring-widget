@@ -48,8 +48,12 @@
         // Get available categories from the data
         const availableCategories = data.categories || [];
         
-        // If no categories requested, return empty array
+        // If no categories requested, use the first available category
         if (!requestedCategories || requestedCategories.length === 0) {
+            if (availableCategories.length > 0) {
+                console.log('No categories specified, using first available category:', availableCategories[0]);
+                return [availableCategories[0]];
+            }
             return [];
         }
         
