@@ -4,6 +4,10 @@ A lightweight, customizable webring widget that brings the spirit of the old web
 
 ## 🚀 Quick Start
 
+### preview
+<div id="saturn91-webring"></div>
+<script src="https://saturn91.github.io/saturn91-webring-widget/public/widget.js"></script>
+
 ### Basic Usage
 
 1. **Add a container to your HTML:**
