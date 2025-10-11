@@ -2,6 +2,9 @@
 
 A lightweight, customizable webring widget that brings the spirit of the old web to modern websites. Easily showcase websites from different categories in your community.
 
+You want to use it on your website and want to get your own website link added?
+Please open up a PR in this repo [saturn91-webring-data](https://github.com/Saturn91/saturn91-webring-data)
+
 ## 🚀 Quick Start
 
 ### preview
