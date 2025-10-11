@@ -5,7 +5,9 @@ A lightweight, customizable webring widget that brings the spirit of the old web
 ## 🚀 Quick Start
 
 ### preview
-<iframe src="https://saturn91.github.io/saturn91-webring-widget/index-raw.html" width="100%" height="400" frameborder="0"></iframe>
+<div align="center">
+  <img src="documentation/preview.png" alt="Saturn Webring Widget Preview" width="100%">
+</div>
 
 ### Basic Usage
 
