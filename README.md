@@ -19,9 +19,22 @@ Please open up a PR in this repo [saturn91-webring-data](https://github.com/Satu
    <div id="saturn91-webring"></div>
    ```
 
-2. **Include the widget script:**
+2. **Include the widget script (choose one method):**
+
+   **Option A: CDN (Recommended - No CORS issues)**
+   ```html
+   <script src="https://cdn.jsdelivr.net/gh/Saturn91/saturn91-webring-widget@latest/public/widget.js"></script>
+   ```
+
+   **Option B: Direct GitHub Pages**
    ```html
    <script src="https://saturn91.github.io/saturn91-webring-widget/public/widget.js"></script>
+   ```
+
+   **Option C: Self-hosted (Most reliable)**
+   ```html
+   <!-- Download widget.js and host it yourself -->
+   <script src="/path/to/your/widget.js"></script>
    ```
 
 That's it! The widget will automatically display links from the first available category.
@@ -31,7 +44,7 @@ That's it! The widget will automatically display links from the first available 
 ```html
 <div id="saturn91-webring"></div>
 <script 
-    src="https://saturn91.github.io/saturn91-webring-widget/public/widget.js"
+    src="https://cdn.jsdelivr.net/gh/Saturn91/saturn91-webring-widget@latest/public/widget.js"
     data-categories="web-dev,game-dev">
 </script>
 ```
@@ -54,7 +67,7 @@ All parameters are optional and can be added as `data-*` attributes to the scrip
 ```html
 <div id="saturn91-webring"></div>
 <script 
-    src="https://saturn91.github.io/saturn91-webring-widget/public/widget.js"
+    src="https://cdn.jsdelivr.net/gh/Saturn91/saturn91-webring-widget@latest/public/widget.js"
     data-categories="web-dev,game-dev"
     data-color="#333333"
     data-background-color="#f9f9f9"
@@ -241,7 +254,7 @@ Check available categories at: https://saturn91.github.io/saturn91-webring-data/
 <body>
     <h1>My Website</h1>
     <div id="saturn91-webring"></div>
-    <script src="https://saturn91.github.io/saturn91-webring-widget/public/widget.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Saturn91/saturn91-webring-widget@latest/public/widget.js"></script>
 </body>
 </html>
 ```
@@ -253,7 +266,7 @@ Check available categories at: https://saturn91.github.io/saturn91-webring-data/
     <div id="saturn91-webring" style="font-size: 14px;"></div>
 </aside>
 <script 
-    src="https://saturn91.github.io/saturn91-webring-widget/public/widget.js"
+    src="https://cdn.jsdelivr.net/gh/Saturn91/saturn91-webring-widget@latest/public/widget.js"
     data-categories="web-dev"
     data-max-links="3">
 </script>
@@ -265,7 +278,7 @@ Check available categories at: https://saturn91.github.io/saturn91-webring-data/
     <div id="saturn91-webring" style="max-width: 800px; margin: 0 auto;"></div>
 </footer>
 <script 
-    src="https://saturn91.github.io/saturn91-webring-widget/public/widget.js"
+    src="https://cdn.jsdelivr.net/gh/Saturn91/saturn91-webring-widget@latest/public/widget.js"
     data-categories="web-dev,game-dev,art-design"
     data-max-links="2">
 </script>
@@ -273,10 +286,17 @@ Check available categories at: https://saturn91.github.io/saturn91-webring-data/
 
 ## 🐛 Troubleshooting
 
+### Script Loading Issues (CORS/Security)
+- **Problem**: Script blocked by browser security policies
+- **Solution**: Use the CDN version: `https://cdn.jsdelivr.net/gh/Saturn91/saturn91-webring-widget@latest/public/widget.js`
+- **Alternative**: Download and self-host the widget.js file
+- **Note**: Some corporate firewalls may block external scripts entirely
+
 ### Widget Not Appearing
 - Check that you have a `<div id="saturn91-webring"></div>` in your HTML
 - Verify the script URL is correct and accessible
 - Check browser console for error messages
+- Try the CDN version if using GitHub Pages direct link
 
 ### No Links Showing
 - Verify category names match those in index.json
